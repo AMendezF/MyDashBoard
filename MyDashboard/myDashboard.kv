@@ -1,65 +1,69 @@
-#:kivy 1.10
+#:kivy 1.10.0
 #:import Factory kivy.factory.Factory
 
-<ActionSpinnerOptions@SpinnerOption>:
-    background_color: .4, .4, .4, 1
-
-<ActionSpinner@Spinner+ActionItem>:
-    canvas.before:
-        Color:
-            rgba: 0.128, 0.128, 0.128, 1
-        Rectangle:
-            size: self.size
-            pos: self.pos
-    border: 27, 20, 12, 12
-    background_normal: 'atlas://data/images/defaulttheme/action_group'
-    option_cls: Factory.ActionSpinnerOptions
-
-<ActionDropdown>:
-    on_size: self.width = '220dp'
-
 <MyDashboardScreen>:
-    ScrollView:
-        do_scroll_x: False
-        do_scroll_y: False if root.fullscreen else (content.height > root.height - dp(16))
-        AnchorLayout:
-            size_hint_y: None
-            height: root.height if root.fullscreen else max(root.height, content.height)
+            
+    GridLayout:
+        cols: 2
+        height: root.height if root.fullscreen else max(root.height, content.height)
+        spacing: '8dp'
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: .20
+            spacing: '8dp'
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: .20
+
+                Label:
+                    id: status
+                    text: '[b]ACTIVE[/b]'
+                    markup: True
+                    font_size: '30sp'
+                    color: root.statusColor
+                    halign: 'center'
+                    valign: 'center'
+                
+                    canvas.before:
+                        Color:
+                            rgb: .3, .3, .3
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                            source: 'data/background.png'
+                Button:
+                    text: '[b]Overview[/b]'
+                    markup: True
+                    font_size: '28sp'
+                    
             GridLayout:
-                id: content
+                id: index
                 cols: 1
-                spacing: '8dp'
-                padding: '8dp'
-                size_hint: (1, 1) if root.fullscreen else (.8, None)
-                height: self.height if root.fullscreen else self.minimum_height
+                row_force_default: True
+                row_default_height: 40
 
-BoxLayout:
-    orientation: 'vertical'
+                canvas.before:
+                    Color:
+                        rgb: .3, .3, .3
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                        source: 'data/background.png'
+                Button:
+                    text: 'WaterFlow'
+                Button:
+                    text: 'Temperature'
 
-    canvas.before:
-        Color:
-            rgb: .6, .6, .6
-        Rectangle:
-            size: self.size
-            source: 'data/background.png'
+        StackLayout:
+            id: content
 
-    ActionBar:
-
-        ActionView:
-            id: av
-            ActionToggleButton:
-                text: 'Toggle sourcecode'
-#                icon: 'data/icons/sourcecode.png'
-#                on_release: app.toggle_source_code()
-            ActionButton:
-                text: 'Previous screen'
-#                icon: 'data/icons/prev.png'
-#                on_release: app.go_previous_screen()
-
-            ActionButton:
-                text: 'Next screen'
-#                icon: 'data/icons/next.png'
-#                on_release: app.go_next_screen()
-                important: True
-
-
+            canvas.before:
+                Color:
+                    rgb: .6, .6, .6
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    source: 'data/background.png'
+        

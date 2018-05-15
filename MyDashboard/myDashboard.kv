@@ -56,14 +56,45 @@
                 Button:
                     text: 'Temperature'
 
-        StackLayout:
-            id: content
+        BoxLayout:
+            orientation: 'vertical'
 
-            canvas.before:
+            canvas:
                 Color:
                     rgb: .6, .6, .6
                 Rectangle:
                     size: self.size
                     pos: self.pos
                     source: 'data/background.png'
-        
+            
+            BoxLayout:
+                id: content
+                orientation: 'vertical'
+                spacing: '8dp'
+                padding: '8dp'
+                
+                GridLayout:
+                    id: components
+                    cols: 2
+                    size_hint_y: 0.45
+                    row_force_default: True
+                    row_default_height: 80
+                    spacing: '4dp'
+                    Button:
+                        text: 'Hello'
+                    
+                    Button:
+                        text: 'Hello'
+
+                    Button:
+                        text: 'Hello'
+                    
+                    Button:
+                        text: 'Hello'
+
+                    Button:
+                        text: 'Hello'
+                    
+                    Button:
+                        text: 'Hello'
+
